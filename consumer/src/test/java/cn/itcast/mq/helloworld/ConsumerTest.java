@@ -8,7 +8,6 @@ import java.util.concurrent.TimeoutException;
 
 public class ConsumerTest {
 
-    @Test
     public static void main(String[] args) throws IOException, TimeoutException {
         // 1.建立连接
         ConnectionFactory factory = new ConnectionFactory();

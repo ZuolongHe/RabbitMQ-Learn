@@ -4,10 +4,15 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class PublisherTest {
     @Test
     public void testSendMessage() throws IOException, TimeoutException {
