@@ -10,3 +10,6 @@ spring:
     virtual-host: /
     username: itcast
     password: 123321
+    listener:
+      simple:
+        prefetch: 1   # 处理完一条消息后再处理下一条消息

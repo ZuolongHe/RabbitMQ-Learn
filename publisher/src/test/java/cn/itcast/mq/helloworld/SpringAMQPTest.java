@@ -21,10 +21,13 @@ public class SpringAMQPTest {
     private RabbitTemplate rabbitTemplate;
 
     @Test
-    public void TestAMQP(){
+    public void TestAMQP() throws InterruptedException {
         String queue = "simple.queue";  // 声明队列名称
-        String message = "测试消息"; // 声明要发送的消息
-        rabbitTemplate.convertAndSend(queue, message);
+        String message = "测试消息--"; // 声明要发送的消息
+        for (int i = 1; i <= 1000; i++) {
+            rabbitTemplate.convertAndSend(queue, message + i + "--");
+            Thread.sleep(20);
+        }
     }
 
 }
