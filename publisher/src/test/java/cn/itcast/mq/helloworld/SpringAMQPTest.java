@@ -30,4 +30,23 @@ public class SpringAMQPTest {
         }
     }
 
+    // 广播
+    @Test
+    public void Fanout(){
+        String exchange = "Fanout-exchange";
+        String message = "广播消息";
+        rabbitTemplate.convertAndSend(exchange, "", message);
+    }
+
+    // 直连
+    @Test
+    public void direct(){
+        String exchange = "itcast.direct";
+        String message = "Direct消息!";
+        String[] routingKey = {"red", "blue"};
+        for (int i = 0; i < routingKey.length; i++) {
+            rabbitTemplate.convertAndSend(exchange, routingKey[i], message);
+        }
+    }
+
 }

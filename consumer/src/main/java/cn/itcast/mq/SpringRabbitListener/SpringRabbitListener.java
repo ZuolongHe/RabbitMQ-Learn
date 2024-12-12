@@ -1,6 +1,9 @@
 package cn.itcast.mq.SpringRabbitListener;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -29,5 +32,38 @@ public class SpringRabbitListener {
         System.err.println(message + LocalDateTime.now());
         Thread.sleep(200);
     }
+
+    // 消费者监听queue1
+    @RabbitListener(queues = "queue1")
+    public void LinstenQueue1(String message){
+        log.info("监听消息：{}", message);
+    }
+
+
+    // 消费者监听queue2
+    @RabbitListener(queues = "queue2")
+    public void LinstenQueue2(String message){
+        log.info("监听消息：{}", message);
+    }
+
+    // 交换机Direct模式
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue("direct.queue1"),
+            exchange = @Exchange("itcast.direct"),
+            key = {"red", "blue"}))
+    public void direct1(String message){
+        log.info("direct1 message:{}", message);
+    }
+
+    // 交换机Direct模式
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue("direct.queue2"),
+            exchange = @Exchange("itcast.direct"),
+            key = {"blue"}))
+    public void direct2(String message){
+        log.info("direct2 message:{}", message);
+    }
+
+
 }
 
