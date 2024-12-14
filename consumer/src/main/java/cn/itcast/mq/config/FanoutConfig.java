@@ -40,11 +40,17 @@ public class FanoutConfig {
         return new Queue("queue2");
     }
 
-    // 交换机绑定队列queue1
+    // 交换机绑定队列queue2
     @Bean
     public Binding bind2(FanoutExchange fanoutExchange, Queue fanoutQueue2){
         return BindingBuilder.bind(fanoutQueue2).to(fanoutExchange);
 
+    }
+
+    // 声明队列simple.queue
+    @Bean
+    public Queue simpleQueue(){
+        return new Queue("simple.queue");
     }
 
 }

@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Title mq-demo
  * @Author hzl
@@ -49,4 +52,22 @@ public class SpringAMQPTest {
         }
     }
 
+    @Test
+    public void topic(){
+        String exchange = "topic.exchange";
+        String message = "Direct消息!";
+        String[] routingKey = {"news.h", "news.k", "sd.china"};
+        for (int i = 0; i < routingKey.length; i++) {
+            rabbitTemplate.convertAndSend(exchange, routingKey[i], message);
+        }
+    }
+
+    @Test
+    public void messageConverter(){
+        String queue = "simple.queue";
+        Map<String, Object> map = new HashMap<>();
+        map.put("1", "消息1");
+        map.put("2", "消息2");
+        rabbitTemplate.convertAndSend(queue, map);
+    }
 }
